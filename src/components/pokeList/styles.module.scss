@@ -1,0 +1,21 @@
+.pokeCardsWrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 15px;
+  row-gap: 15px;
+  justify-items: center;
+  height: 100%;
+  width: 60%;
+  margin-bottom: 15px;
+
+  @media (max-width: 767px) {
+    display: block;
+    height: 80vh;
+  }
+}
+
+@media (max-width: 767px) {
+  .pokeCardItem:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
