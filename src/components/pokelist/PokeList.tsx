@@ -8,14 +8,23 @@ interface PokeListProps {
   currentPage: number;
   onSetIsBtnDisabled: (boolean: boolean) => void;
   onShowPokeDetails: (id: number) => void;
+  filterValue: string;
 }
 
 export const Pokelist = ({
   currentPage,
   onSetIsBtnDisabled,
   onShowPokeDetails,
+  filterValue,
 }: PokeListProps) => {
   const [pokeList, setPokeList] = useState<Pokemon[]>([]);
+
+  const filteredPoke = pokeList.filter((item) => {
+    if (filterValue) {
+      return item.types.some((item) => item.type.name.includes(filterValue));
+    }
+    return pokeList;
+  });
 
   useEffect(() => {
     const getPoke = async () => {
@@ -35,13 +44,11 @@ export const Pokelist = ({
     getPoke();
   }, [currentPage, onSetIsBtnDisabled]);
 
-  console.log(pokeList);
-
   return (
     <div>
       {pokeList && (
         <ul className={css.pokeCardsWrap}>
-          {pokeList.map((item) => (
+          {filteredPoke.map((item) => (
             <li
               key={item.id}
               onClick={() => onShowPokeDetails(item.id)}

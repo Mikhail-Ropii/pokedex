@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export interface Pokemon {
   id: number;
   name: string;
@@ -23,4 +21,6 @@ type Stats = {
 
 export interface PokemonDetails extends Pokemon {
   stats: Stats[];
+  weight: number;
+  totalMoves: number;
 }

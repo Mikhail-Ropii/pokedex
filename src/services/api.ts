@@ -11,6 +11,16 @@ export const getPokeList = async (currentPage: number) => {
   return data;
 };
 
+export const getTypesList = async () => {
+  const { data } = await axios.get("/type?limit=999");
+  const result = data.results.map(({ name }: any) => {
+    return {
+      name,
+    };
+  });
+  return result;
+};
+
 export const getPokeDetails = async (urls: string[]) => {
   const requests = urls.map((url) => axios.get(url));
   const responses = await axios.all(requests);
@@ -25,7 +35,17 @@ export const getPokeDetails = async (urls: string[]) => {
   return data;
 };
 
-export const getPokeById = async (id: number) => {
-  const data = await axios.get(`/pokemon/${id}`);
+export const getPokeById = async (_id: number) => {
+  const response = await axios.get(`/pokemon/${_id}`);
+  const data = (({ id, name, sprites, types, stats, weight, moves }: any) => ({
+    id,
+    name,
+    img: sprites.front_default,
+    types,
+    stats,
+    weight,
+    totalMoves: moves.length,
+  }))(response.data);
+
   return data;
 };
