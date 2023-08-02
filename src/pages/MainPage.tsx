@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Pokelist } from "../components/pokeList/PokeList";
 import { getPokeById } from "../services/api";
-
 import css from "./styles.module.scss";
 import { Button } from "../components/button/Button";
 import { Container } from "../components/container/Container";
+import { Pokelist } from "../components/pokeList/PokeList";
 import { PokeDetails } from "../components/pokeDetails/PokeDetails";
 import { PokemonDetails } from "../models/pokemon";
 import { FilterBlock } from "../components/filterBlock/FilterBlock";
